@@ -1,0 +1,74 @@
+services:
+  # Serviço do banco de dados PostgreSQL
+  postgres:
+    # Imagem base do PostgreSQL. Usamos a versão 16 com base Alpine para um tamanho menor.
+    image: postgres:18-alpine
+    container_name: radar_db
+    hostname: radar_hostdb
+    networks:
+      - infraestrutura
+    # Variáveis de ambiente para configurar o contêiner do Postgres.
+
+    environment:
+      # Credenciais para o superusuário e o banco de dados inicial.
+      # Altere 'seu_usuario' e 'sua_senha_forte' para valores seguros.
+      POSTGRES_USER: radar_user
+      POSTGRES_PASSWORD: radar_psw
+      POSTGRES_DB: radar_db
+      
+      # Configurações de Localização e Fuso Horário para o Brasil.
+      LANG: pt_BR.utf8      # Define o idioma e a codificação para ordenação e tipos de caracteres.
+      TZ: America/Sao_Paulo # Define o fuso horário do sistema operacional do contêiner.
+      PGTZ: America/Sao_Paulo # Define o fuso horário para o serviço do PostgreSQL.
+    # Mapeia um volume nomeado para o diretório de dados do Postgres, garantindo a persistência dos dados.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck: # Ensures Liquibase waits for the DB to be ready
+      test: ["CMD-SHELL", "pg_isready -U radar_user -d radar_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Mapeia a porta 5432 do contêiner para a porta 5432 da sua máquina.
+    ports:
+      - "5432:5432"
+    # Define a política de reinicialização. 'unless-stopped' reinicia o contêiner a menos que ele seja parado manualmente.
+    restart: unless-stopped
+    # Conecta o serviço à rede 'app-network'.
+
+        
+
+  # Serviço do pgAdmin para gerenciamento do banco de dados
+  pgadmin:
+    # Imagem oficial do pgAdmin 4.
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4_container
+    hostname: pgadmin4
+    # Variáveis de ambiente para o pgAdmin.
+    environment:
+      # Credenciais para o login inicial na interface web do pgAdmin.
+      PGADMIN_DEFAULT_EMAIL: admin@exemplo.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    # Mapeia volumes para dados persistentes e para o arquivo de configuração de servidores.
+    volumes:
+      # Volume para dados do pgAdmin (configurações, etc.).
+      - pgadmin_data:/var/lib/pgadmin
+    # Mapeia a porta 80 do contêiner para a porta 5050 da sua máquina.
+    ports:
+      - "5050:80"
+    # Garante que o pgAdmin só inicie após o serviço 'postgres' estar pronto.
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - infraestrutura
+
+# Define as redes que os serviços podem usar para se comunicar.
+networks:
+  infraestrutura:
+    driver: bridge
+
+# Define os volumes nomeados para persistência de dados.
+volumes:
+  postgres_data:
+  pgadmin_data:
