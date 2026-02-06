@@ -79,6 +79,16 @@ public class Book {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public boolean isAvailable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setAvailable(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
     
     
 }

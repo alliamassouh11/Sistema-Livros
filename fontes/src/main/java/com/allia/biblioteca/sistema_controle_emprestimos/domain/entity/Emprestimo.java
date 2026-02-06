@@ -12,8 +12,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "emprestimo")
+@Table(name = "loans") 
 public class Emprestimo {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +32,7 @@ public class Emprestimo {
     @JoinColumn(name = "operator_id", nullable = false)
     private User operator;
 
-    @Column(name = "emprestimo_date" , nullable = false)
+    @Column(name = "loan_date", nullable = false)
     private LocalDateTime loanDate;
 
     @Column(name = "return_date")
