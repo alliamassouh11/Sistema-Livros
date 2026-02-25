@@ -1,0 +1,82 @@
+/* Configurações de Layout */
+.container-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Barra Superior Azul Escura (ou Verde Escuro da sua paleta) */
+.top-bar {
+  background-color: #002350; /* Cor original do TSE para manter o vínculo */
+  color: white;
+  font-size: 0.75rem;
+  padding: 8px 0;
+}
+
+.top-bar span {
+  margin-left: 15px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* Navbar Principal */
+.navbar {
+  background-color: var(--white);
+  padding: 15px 0;
+  border-bottom: 4px solid var(--amber-gold); /* Destaque da sua paleta */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--dark-spruce);
+  border-radius: 50%;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  color: var(--dark-spruce);
+  line-height: 1;
+}
+
+.logo-text strong { font-size: 1.4rem; }
+.logo-text span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Links de Navegação */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  color: #444;
+  font-weight: 600;
+}
+
+.nav-links li {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-links li:hover {
+  color: var(--bright-indigo);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  background-color: var(--gray-light);
+  padding: 10px 0;
+  font-size: 0.85rem;
+  color: #666;
+}

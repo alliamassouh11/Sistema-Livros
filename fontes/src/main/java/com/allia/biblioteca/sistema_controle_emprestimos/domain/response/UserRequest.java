@@ -10,6 +10,8 @@ public record UserRequest(
 
         @Email(message = "Email inválido")
         @NotBlank(message = "Email é obrigatório")
-        String email
-) {}
+        String email,
 
+        @NotBlank(message = "Senha é obrigatória")
+        String password
+) {}
