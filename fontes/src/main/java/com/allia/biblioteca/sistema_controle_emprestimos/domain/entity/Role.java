@@ -18,8 +18,6 @@ public class Role {
     @Column(nullable = false, unique = true, length = 50)
     private String name;
 
-    @Column(length = 255)
-    private String description;
 
 	public Long getId() {
 		return id;
@@ -37,11 +35,4 @@ public class Role {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 }

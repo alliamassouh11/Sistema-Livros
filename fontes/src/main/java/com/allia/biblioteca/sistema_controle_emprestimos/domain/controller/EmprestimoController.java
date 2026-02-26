@@ -24,7 +24,6 @@ public class EmprestimoController {
 	public Emprestimo emprestar(@RequestBody EmprestimoRequest request) {
 		return emprestimoService.emprestar(
 				request.idLivro(),
-				request.nomeLivro(),
 				request.idCliente(),
 				request.idOperador()
 				);
