@@ -1,57 +1,54 @@
-import { useState } from "react";
-import axios from "axios";
-import "./App.css";
+import { useState } from "react"
+import axios from "axios"
 
-function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function App() {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleLogin = async () => {
+
     try {
+
       const response = await axios.get(
         "http://localhost:8080/livros",
         {
           auth: {
-            username: username,
+            username: email,
             password: password
           }
         }
-      );
+      )
 
-      if (response.status === 200) {
-        alert("Login realizado com sucesso!");
-      }
+      alert("Login realizado com sucesso!")
+
     } catch (error) {
-      alert("Usuário ou senha inválidos.");
-      console.error(error);
+      alert("Email ou senha inválidos")
     }
-  };
+
+  }
 
   return (
-    <div className="container">
-      <div className="card">
-        <h1>Sistema Biblioteca</h1>
+    <div>
 
-        <input
-          type="text"
-          placeholder="Usuário"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <h2>Login</h2>
 
-        <input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="Email"
+        onChange={(e)=>setEmail(e.target.value)}
+      />
 
-        <button onClick={handleLogin}>
-          Entrar
-        </button>
-      </div>
+      <input
+        type="password"
+        placeholder="Senha"
+        onChange={(e)=>setPassword(e.target.value)}
+      />
+
+      <button onClick={handleLogin}>
+        Entrar
+      </button>
+
     </div>
-  );
+  )
 }
-
-export default App;
