@@ -17,7 +17,7 @@ public class BookService {
 	        this.bookRepository = bookRepository;
 	    }
 
-	    public List<Book> listarTodos() {
+	    public List<Book> listarTodos() { //alteração aqui 
 	        return bookRepository.findAll();
 	    }
 
@@ -26,11 +26,24 @@ public class BookService {
 	            .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 	    }
 
-	    public Book salvar(Book book) {
+	    public Book criar(Book book) { //tem que alterar, pq o status dependende do estado
 	        book.setCreatedAt(LocalDateTime.now());
 	        book.setStatus("AVAILABLE");
 	        return bookRepository.save(book);
 	    }
+
+		public Book atualizar(Long id, Book bookAtualizado) {
+
+    return bookRepository.findById(id) 
+        .map(bookExistente -> {          
+            bookExistente.setTitle(bookAtualizado.getTitle()); 
+            bookExistente.setAuthor(bookAtualizado.getAuthor());
+          
+            return bookRepository.save(bookExistente); 
+        })
+        .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+}
+		
 	}
 	
 

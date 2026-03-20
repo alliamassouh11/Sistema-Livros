@@ -9,7 +9,6 @@ import com.allia.biblioteca.nucleo_compartilhado.Emprestimo;
 
 @Controller
 @RequestMapping ("/loans")
-
 public class EmprestimoController {
 	
 	private EmprestimoService emprestimoService;
@@ -27,3 +26,4 @@ public class EmprestimoController {
 				);
 	}
 }
+ //registrar saida e devolver -> atualizar

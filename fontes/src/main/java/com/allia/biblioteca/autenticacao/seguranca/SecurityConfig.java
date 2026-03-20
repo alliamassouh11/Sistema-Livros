@@ -1,5 +1,5 @@
 package com.allia.biblioteca.autenticacao.seguranca;
-
+/* 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -92,4 +92,4 @@ public class SecurityConfig {
 
         return source;
     }
-}
+}*/

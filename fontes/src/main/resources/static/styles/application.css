@@ -1,0 +1,42 @@
+/* Estilos customizados mínimos para complementar o Bootstrap */
+:root {
+    --bs-primary: #2563eb;
+    --bs-primary-rgb: 37, 99, 235;
+}
+
+body {
+    background-color: #f8fafc;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--bs-primary) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.table thead th {
+    background-color: #f1f5f9;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #64748b;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    font-weight: 600;
+}
+
+.footer {
+    margin-top: 5rem;
+    color: #64748b;
+}

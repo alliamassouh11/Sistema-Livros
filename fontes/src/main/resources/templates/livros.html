@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+	<div th:replace="~{fragments/header :: pagina(titulo='Listagem de livros')}"></div>	
+
+	<body>
+        <div th:replace="~{fragments/cabecalho :: cabecalho}"></div>
+<main class="container my-5">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Capa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="livro : ${meusLivros}">
+                <td th:text="${livro.id}">1</td>
+                <td th:text="${livro.title}">Título Genérico</td>
+                <td th:text="${livro.author}">Autor Genérico</td>
+                <td><img th:src="${livro.capaLivro}" alt="Logo da Biblioteca" width="100"></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="~{fragments/rodape :: rodape}"></div>
+
+</body>
+</html>

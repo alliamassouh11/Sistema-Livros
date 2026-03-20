@@ -30,7 +30,9 @@ CREATE TABLE books (
     status VARCHAR(20) NOT NULL DEFAULT 'AVAILABLE',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_book_status 
-        CHECK (status IN ('AVAILABLE', 'LOANED', 'UNAVAILABLE'))
+        CHECK (status IN ('AVAILABLE', 'LOANED', 'UNAVAILABLE')),
+    URLcapa VARCHAR(200) NOT NULL
+    
 );
 
 CREATE TABLE loans (

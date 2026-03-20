@@ -1,0 +1,63 @@
+project:
+  info:
+    version: @project.version@
+    name: @project.name@
+server:
+  servlet:
+    context-path: ${CONTEXT_PATH:/sistema-controle-emprestimos/}
+  port: ${PORT:8081}
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    suffix: .html
+  servlet:
+    multipart:
+      enabled: ${SERVLET_MULTIPART:true}
+      max-file-size: ${SERVLET_MULTIPART_MAX_FILE_SIZE:50MB}
+  devtools:
+    restart:
+      enabled: ${DEVTOOLS_RESTART:true}
+    add-properties: ${DEVTOOLS_ADD_PROPERTIES:true}
+  application:
+    name: sistema-controle-emprestimos
+  data:
+    web:
+      pageable:
+        max-page-size: ${PAGEABLE_MAX_PAGE_SIZE:10}
+    rest:
+      max-page-size: ${PAGEABLE_MAX_PAGE_SIZE:10}
+  mvc:
+    format:
+      date-time: ${FORMAT_DATE_TIME:iso}
+  jackson:
+    time-zone: ${JACKSON_TIME_ZONE:America/Sao_Paulo}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:validate}
+    properties:
+      hibernate:
+        show_sql: ${HIBERNATE_SHOW_SQL:true}
+        format_sql: ${HIBERNATE_FORMAT_SQL:true}
+        generate_statistics: false
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/radar_db}
+    username: ${DB_USER:radar_user}
+    password: ${DB_PASS:radar_psw}
+
+    hikari:
+      auto-commit: false
+      pool-name: HikariPool_library
+      minimum-idle: ${DB_MINIMUM_IDLE:5}
+      maximum-pool-size: ${DB_MAXIMUM_POOL_SIZE:20}
+      max-lifetime: ${DB_MAX_LIVE_TIME:1800000}
+      idle-timeout: ${DB_IDLE_TIMEOUT:30000}
+      connection-timeout: ${DB_CONNECTION_TIMEOUT:30000}
+
+logging:
+  level:
+    org.thymeleaf: INFO
+    org.springframework.web.servlet.view: INFO

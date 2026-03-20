@@ -1,0 +1,20 @@
+ <nav th:fragment="cabecalho" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="navbar navbar-expand-lg bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                BiblioTech
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Livros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Usuários</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="#">Empréstimos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Relatórios</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>

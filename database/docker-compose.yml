@@ -2,20 +2,20 @@ services:
   # Serviço do banco de dados PostgreSQL
   postgres:
     # Imagem base do PostgreSQL. Usamos a versão 16 com base Alpine para um tamanho menor.
-    image: postgres:18-alpine
+    image: postgres:16-alpine
     container_name: radar_db
     hostname: radar_hostdb
     networks:
       - infraestrutura
     # Variáveis de ambiente para configurar o contêiner do Postgres.
-
+ 
     environment:
       # Credenciais para o superusuário e o banco de dados inicial.
       # Altere 'seu_usuario' e 'sua_senha_forte' para valores seguros.
       POSTGRES_USER: radar_user
       POSTGRES_PASSWORD: radar_psw
       POSTGRES_DB: radar_db
-      
+     
       # Configurações de Localização e Fuso Horário para o Brasil.
       LANG: pt_BR.utf8      # Define o idioma e a codificação para ordenação e tipos de caracteres.
       TZ: America/Sao_Paulo # Define o fuso horário do sistema operacional do contêiner.
@@ -35,9 +35,9 @@ services:
     # Define a política de reinicialização. 'unless-stopped' reinicia o contêiner a menos que ele seja parado manualmente.
     restart: unless-stopped
     # Conecta o serviço à rede 'app-network'.
-
-        
-
+ 
+       
+ 
   # Serviço do pgAdmin para gerenciamento do banco de dados
   pgadmin:
     # Imagem oficial do pgAdmin 4.
@@ -62,13 +62,15 @@ services:
     restart: unless-stopped
     networks:
       - infraestrutura
-
+ 
 # Define as redes que os serviços podem usar para se comunicar.
 networks:
   infraestrutura:
     driver: bridge
-
+ 
 # Define os volumes nomeados para persistência de dados.
 volumes:
   postgres_data:
   pgadmin_data:
+
+  

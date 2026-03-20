@@ -13,6 +13,8 @@ import jakarta.persistence.Table;
 @Table(name = "books")
 public class Book {
 
+	//criou enum para mostrar estado: reservado, atrasado e mais 3
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +33,18 @@ public class Book {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+
+	@Column(name = "URLcapa", nullable = false)
+	private String capaLivro;
+
+	public void setCapaLivro(String capa){
+		this.capaLivro = capa;
+	}
+	
+	public String getCapaLivro(){
+		return this.capaLivro;
+	}
 
 	public Long getId() {
 		return id;
@@ -90,5 +104,5 @@ public class Book {
 		
 	}
     
-    
 }
+
