@@ -1,32 +1,222 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-	<div th:replace="~{fragments/header :: pagina(titulo='Listagem de livros')}"></div>	
 
-	<body>
-        <div th:replace="~{fragments/cabecalho :: cabecalho}"></div>
-<main class="container my-5">
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Capa</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="livro : ${meusLivros}">
-                <td th:text="${livro.id}">1</td>
-                <td th:text="${livro.title}">Título Genérico</td>
-                <td th:text="${livro.author}">Autor Genérico</td>
-                <td><img th:src="${livro.capaLivro}" alt="Logo da Biblioteca" width="100"></td>
-            </tr>
-        </tbody>
-    </table>
+<html class="light" lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e0e3e5",
+              "secondary-fixed": "#dbe1ff",
+              "tertiary-fixed-dim": "#ffb596",
+              "on-error-container": "#93000a",
+              "on-surface": "#191c1e",
+              "on-surface-variant": "#434655",
+              "outline": "#737686",
+              "on-background": "#191c1e",
+              "on-secondary-fixed": "#00174b",
+              "secondary-container": "#acbfff",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#394c84",
+              "error-container": "#ffdad6",
+              "surface-bright": "#f7f9fb",
+              "on-tertiary-fixed": "#360f00",
+              "surface-tint": "#0053db",
+              "inverse-primary": "#b4c5ff",
+              "surface-variant": "#e0e3e5",
+              "primary-fixed-dim": "#b4c5ff",
+              "tertiary-container": "#bc4800",
+              "on-tertiary-container": "#ffede6",
+              "surface-container": "#eceef0",
+              "surface-container-high": "#e6e8ea",
+              "on-primary-fixed-variant": "#003ea8",
+              "on-primary-fixed": "#00174b",
+              "primary-fixed": "#dbe1ff",
+              "primary": "#004ac6",
+              "tertiary-fixed": "#ffdbcd",
+              "on-primary-container": "#eeefff",
+              "surface-dim": "#d8dadc",
+              "tertiary": "#943700",
+              "on-tertiary-fixed-variant": "#7d2d00",
+              "on-tertiary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#2563eb",
+              "secondary-fixed-dim": "#b4c5ff",
+              "on-secondary-fixed-variant": "#31447b",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "background": "#f7f9fb",
+              "outline-variant": "#c3c6d7",
+              "surface-container-low": "#f2f4f6",
+              "on-error": "#ffffff",
+              "secondary": "#495c95",
+              "surface": "#f7f9fb",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-nav {
+            background: rgba(247, 249, 251, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .ambient-shadow {
+            box-shadow: 0 20px 40px rgba(25, 28, 30, 0.04);
+        }
+        .ghost-border {
+            outline: 1px solid rgba(195, 198, 215, 0.15);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #004ac6 0%, #2563eb 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-slate-900 dark:text-white font-headline tracking-tight">LibraryPro</span>
+<div class="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
+<a class="text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 pb-4 mt-4" href="#">Livros</a>
+<a class="text-slate-600 dark:text-slate-400 pb-4 mt-4 hover:text-blue-500 transition-colors" href="#">Usuários</a>
+<a class="text-slate-600 dark:text-slate-400 pb-4 mt-4 hover:text-blue-500 transition-colors" href="#">Empréstimos</a>
+<a class="text-slate-600 dark:text-slate-400 pb-4 mt-4 hover:text-blue-500 transition-colors" href="#">Relatórios</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Librarian Profile" data-alt="professional portrait of a librarian with a friendly expression in a modern bright setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMZj7HMsMWBR_5uENal0q6JETb3iqkQ-y466guboqi0W1k6RQwHwHdngfeQn6CtWUwjJIoQEHXhr6d7tT1SpyvULMRqfRWbjm-n-u8E_g1jyKNGnwhdHgkW9DiR6JLm2RpYJC8wo4n_559PSqJYexATiJrTMLwlRNsSG0L2gxZCKw7yXqxXqnjWHM1D_usKdrqj0-JRGixggoURMLmH1W0VOPL8Dn6C9CnbhDif3_yb1sQkMsj3hLFY-dDO5po6ZqD2zv8BRV696U"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<h1 class="text-display-lg font-headline text-5xl font-extrabold tracking-tight text-on-surface">
+                        Catálogo de Livros
+                    </h1>
+<p class="text-on-surface-variant font-body text-lg">Gerencie o acervo da biblioteca com precisão editorial.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest ghost-border rounded-full font-body text-sm focus:ring-2 focus:ring-primary-fixed outline-none transition-all" placeholder="Buscar título, autor ou ID..." type="text"/>
+</div>
+<form method="post" th:action="@{/books/criar}">
+<button class="primary-gradient text-on-primary px-6 py-3 rounded-xl font-medium flex items-center gap-2 hover:-translate-y-0.5 transition-transform ambient-shadow" type="submit">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Novo Livro
+                    </button>
+</form>
+</div>
+</div>
+<!-- Filters -->f
+<div class="flex flex-wrap gap-3 mt-8">
+<button class="px-5 py-2 bg-primary-fixed text-on-primary-fixed rounded-full text-sm font-medium">Todos</button>
+<button class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors">Ficção</button>
+<button class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors">História</button>
+<button class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors">Ciências</button>
+<button class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors">Artes</button>
+<button class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium hover:bg-surface-container-high transition-colors">Tecnologia</button>
+</div>
+</header>
+<!-- Books Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<!-- Dynamic Book Card Iteration -->
+<div class="group bg-surface-container-lowest rounded-xl p-4 ambient-shadow ghost-border hover:-translate-y-1 transition-all duration-300 flex flex-col" th:each="book : ${meusLivros}">
+<div class="aspect-[3/4] mb-4 overflow-hidden rounded-xl bg-surface-container-highest">
+<img alt="Capa do Livro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" th:alt="${book.title}" th:src="${book.imageUrl ?: 'https://images.unsplash.com/photo-1543004457-450c33cf941c?q=80&amp;w=1000&amp;auto=format&amp;fit=crop'}"/>
+</div>
+<div class="space-y-2 flex-grow">
+<div class="flex justify-between items-start gap-2">
+<h3 class="font-headline font-bold text-lg text-on-surface leading-tight" th:text="${book.title}">Título do Livro</h3>
+<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase rounded-md shrink-0">Ativo</span>
+</div>
+<p class="text-on-surface-variant text-sm font-body" th:text="${book.author}">Nome do Autor</p>
+<div class="flex items-center justify-between pt-2">
+<span class="text-label-sm text-outline font-medium tracking-wider" th:text="'ID: #' + ${book.id}">ID: #BK-0000</span>
+<div class="flex gap-1">
+<!-- Edit Action -->
+<form method="post" th:action="@{/books/atualizar/{id}(id=${book.id})}"> 
+<button class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors" title="Editar" type="submit">
+<span class="material-symbols-outlined !text-[20px]" data-icon="edit">edit</span>
+</button>
+</form>
+<!-- Delete Action -->
+<form method="post" onsubmit="return confirm('Tem certeza que deseja excluir este livro?');" th:action="@{/books/deletar/{id}(id=${book.id})}">
+<button class="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors" title="Excluir" type="submit">
+<span class="material-symbols-outlined !text-[20px]" data-icon="delete">delete</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- Fallback if empty -->
+<div class="col-span-full py-20 text-center" th:if="${#lists.isEmpty(meusLivros)}">
+<span class="material-symbols-outlined text-outline text-6xl mb-4" data-icon="auto_stories">auto_stories</span>
+<p class="text-on-surface-variant text-lg">Nenhum livro encontrado no catálogo.</p>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex items-center justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
 </main>
-
-<div th:replace="~{fragments/rodape :: rodape}"></div>
-
-</body>
-</html>
+<!-- Footer -->
+<footer class="bg-surface-container-low mt-auto py-10 px-6">
+<div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg primary-gradient flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="book">book</span>
+</div>
+<span class="font-headline font-bold text-lg text-on-surface tracking-tight">LibraryPro</span>
+</div>
+<p class="text-on-surface-variant text-sm font-body">
+                Library Management System 2024. Todos os direitos reservados.
+            </p>
+<div class="flex gap-6 text-sm font-medium text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Privacidade</a>
+<a class="hover:text-primary transition-colors" href="#">Termos</a>
+<a class="hover:text-primary transition-colors" href="#">Ajuda</a>
+</div>
+</div>
+</footer>
+</body></html>

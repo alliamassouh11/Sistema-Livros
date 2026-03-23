@@ -6,6 +6,10 @@ server:
   servlet:
     context-path: ${CONTEXT_PATH:/sistema-controle-emprestimos/}
   port: ${PORT:8081}
+  error:
+    include-message: always
+    include-stacktrace: always
+
 spring:
   thymeleaf:
     cache: false
@@ -59,5 +63,8 @@ spring:
 
 logging:
   level:
-    org.thymeleaf: INFO
-    org.springframework.web.servlet.view: INFO
+    root: INFO
+    com.allia.biblioteca: DEBUG # Nível de log do seu código
+    org.springframework.web: DEBUG # Para ver detalhes de requisições HTTP
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE # Mostra os parâmetros do banco (Spring Boot 3.x+)

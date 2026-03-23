@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.allia.biblioteca.nucleo_compartilhado.Emprestimo;
 
 @Controller
-@RequestMapping ("/loans")
+@RequestMapping ("/emprestimos")
 public class EmprestimoController {
 	
 	private EmprestimoService emprestimoService;
