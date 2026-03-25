@@ -1,6 +1,6 @@
 package com.allia.biblioteca.autenticacao.seguranca;
 
-/*import java.util.Collection;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,4 +39,3 @@ public class UserDetailsImplement implements UserDetails {
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return user.getActive(); }
 }
-*/

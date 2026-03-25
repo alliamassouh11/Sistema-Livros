@@ -1,5 +1,5 @@
 package com.allia.biblioteca.autenticacao.seguranca;
-/* 
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,4 +29,4 @@ public class UserDetailsServiceImplement implements UserDetailsService {
     }
 
     
-}*/
+}
